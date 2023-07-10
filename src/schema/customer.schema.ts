@@ -3,7 +3,7 @@ import { IsEmail } from "class-validator";
 import { Document, Types } from "mongoose";
 
 @Schema()
-export class CustomerAdress {
+export class CustomerAdress extends Document {
     @Prop({ trim: true })
     country: string;
 
