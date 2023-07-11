@@ -1,22 +1,29 @@
-import { IsBoolean, IsEmail, IsNotEmpty, IsString, MaxLength, MinLength, isNotEmpty } from "class-validator";
+import { Type } from "class-transformer";
+import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength, ValidateNested, isNotEmpty } from "class-validator";
 
 export class ICustomerAddress {
-    @IsString()
+    @IsNotEmpty({ message: 'No se proporciono el pais' })
+    @IsString({ message: 'El pais proporcionado no es un texto' })
     country: string;
 
-    @IsString()
+    @IsNotEmpty({ message: 'No se proporciono la calle' })
+    @IsString({ message: 'La calle proporcionada no es un texto' })
     street1: string;
 
-    @IsString()
+    @IsOptional()
+    @IsString({ message: 'La calle 2 proporcionada no es un texto' })
     street2: string;
 
-    @IsString()
+    @IsNotEmpty({ message: 'No se proporciono la ciudad' })
+    @IsString({ message: 'La ciudad proporcionada no es un texto' })
     city: string;
 
-    @IsString()
+    @IsNotEmpty({ message: 'No se proporciono el estado' })
+    @IsString({ message: 'El estado proporcionado no es un texto' })
     state: string;
 
-    @IsString()
+    @IsNotEmpty({ message: 'No se proporciono el codigo zip' })
+    @IsString({ message: 'El codigo zip proporcionado no es un texto' })
     zip: string;
 }
 
@@ -39,7 +46,9 @@ export class ICustomer {
     @IsBoolean()
     emailVerified: boolean;
 
-    address: Array<ICustomerAddress>;
+    @ValidateNested({ each: true })
+    @Type(() => ICustomerAddress)
+    address: ICustomerAddress[];
 
     @IsString()
     @MinLength(9, {
