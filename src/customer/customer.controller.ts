@@ -1,5 +1,5 @@
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
-import { ICustomer } from 'src/db/customer.interface';
+import { Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/db/customer.interface';
 import { CustomerService } from './customer.service';
 import { CustomerPipeBody } from '../pipes/customer.pipe';
 import { isNil } from 'ramda'
@@ -25,6 +25,25 @@ export class CustomerController {
     create(@Body(new CustomerPipeBody()) body: ICustomer) {
         return this.customerService.create(body)
             .catch(manageError)
+    }
+
+    @Put(':id')
+    async update(@Param('id') id: string, @Body(new CustomerPipeBody()) customer: ICustomerUpdate) {
+        const customerUpdated = await this.customerService.update(id, customer)
+        if (isNil(customerUpdated)) throw new NotFoundException()
+        return customerUpdated
+    }
+
+    @Put(':id/address')
+    async addAddress(@Param('id') id: string, @Body() address: ICustomerAddress) {
+        const customerUpdated = await this.customerService.addAddress(id, address)
+        return customerUpdated
+    }
+
+    @Put(':id/address/:idAddress')
+    async updateAddress(@Param('id') id: string, @Param('idAddress') idAddress: string, @Body() address: ICustomerAddress) {
+        const customerUpdated = await this.customerService.updateAddress(id, address, idAddress)
+        return customerUpdated
     }
 
 }

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength, ValidateNested, isNotEmpty } from "class-validator";
+import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength, ValidateNested } from "class-validator";
 
 export class ICustomerAddress {
     @IsNotEmpty({ message: 'No se proporciono el pais' })
@@ -37,7 +37,7 @@ export class ICustomer {
     lname: string;
 
     @IsNotEmpty({ message: 'No se proporciono el email' })
-    @IsEmail({},{message:'El valor proporcionado no es un email valido'})
+    @IsEmail({}, { message: 'El valor proporcionado no es un email valido' })
     email: string;
 
     @IsNotEmpty()
@@ -51,12 +51,41 @@ export class ICustomer {
     address: ICustomerAddress[];
 
     @IsString()
-    @MinLength(9, {
-        message: 'Title is too short. Minimal length is $constraint1 characters, but actual is $value',
-    })
-    @MaxLength(9, {
-        message: 'Title is too long. Maximal length is $constraint1 characters, but actual is $value',
-    })
+    @MinLength(9, { message: 'El numero es demasiado corto. El minimo es $constraint1 numeros, pero se recibio $value' })
+    @MaxLength(9, { message: 'El numero es demasiado largo. El maximo es $constraint1 numeros, pero se recibio $value' })
     phoneNumber: string;
 }
+
+
+export class ICustomerUpdate {
+    @IsOptional()
+    @IsNotEmpty({ message: 'No se proporciono el nombre' })
+    @IsString({ message: 'El nombre proporcionado no es un texto' })
+    fname: string;
+
+    @IsOptional()
+    @IsNotEmpty({ message: 'No se proporciono el apellido' })
+    @IsString({ message: 'El apellido proporcionado no es un texto' })
+    lname: string;
+
+    @IsOptional()
+    @IsNotEmpty({ message: 'No se proporciono el email' })
+    @IsEmail({}, { message: 'El valor proporcionado no es un email valido' })
+    email: string;
+
+    @IsOptional()
+    @IsNotEmpty()
+    hashedAndSaltedPassword: string;
+
+    @IsOptional()
+    @IsBoolean()
+    emailVerified: boolean;
+
+    @IsOptional()
+    @IsString()
+    @MinLength(9, { message: 'El numero es demasiado corto. El minimo es $constraint1 numeros, pero se recibio $value' })
+    @MaxLength(9, { message: 'El numero es demasiado largo. El maximo es $constraint1 numeros, pero se recibio $value' })
+    phoneNumber: string;
+}
+
 

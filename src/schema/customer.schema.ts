@@ -26,13 +26,7 @@ export const customerAdressSchema = SchemaFactory.createForClass(CustomerAdress)
 
 @Schema({ timestamps: true })
 export class Customer extends Document {
-    @Prop(
-        {
-            trim: true,
-            required: true
-        }
-    )
-
+    @Prop({ trim: true, required: true })
     fname: string;
 
     @Prop({ trim: true })
