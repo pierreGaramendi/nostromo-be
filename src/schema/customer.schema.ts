@@ -26,14 +26,20 @@ export const customerAdressSchema = SchemaFactory.createForClass(CustomerAdress)
 
 @Schema({ timestamps: true })
 export class Customer extends Document {
-    @Prop({ trim: true })
+    @Prop(
+        {
+            trim: true,
+            required: true
+        }
+    )
+
     fname: string;
 
     @Prop({ trim: true })
     lname: string;
 
     @Prop({
-        trim: true, 
+        trim: true,
         unique: true,
         required: true,
         index: true
@@ -49,6 +55,9 @@ export class Customer extends Document {
 
     @Prop({ type: [customerAdressSchema] })
     address: Types.Array<CustomerAdress>;
+
+    @Prop({ maxlength: 9 })
+    phoneNumber: string
 }
 
 export const customerSchema = SchemaFactory.createForClass(Customer)
