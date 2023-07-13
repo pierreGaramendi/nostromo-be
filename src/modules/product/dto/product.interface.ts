@@ -33,7 +33,7 @@ export class IProduct {
     @IsString({ message: 'El nombre del producto proporcionado no es un texto' })
     title: string;
 
-    @IsNotEmpty({ message: 'No se proporciono el email' })
+    @IsNotEmpty({ message: 'No se proporciono el vendedor' })
     sellerId: string;
 
     @IsString({ message: 'El descripcion del producto proporcionado no es un texto' })
@@ -57,8 +57,8 @@ export class IProduct {
     @IsNotEmpty({ message: 'No se proporciono el estado del producto' })
     condition: string;
 
-    @IsNotEmpty({ message: 'No se proporciono el modelo del producto' })
-    model: string;
+    @IsNotEmpty({ message: 'No se proporciono la marca del producto' })
+    brand: string;
 
     @IsOptional()
     PUC: string;

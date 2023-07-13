@@ -10,8 +10,8 @@ export class CustomerController {
     constructor(private customerService: CustomerService) { }
 
     @Get()
-    findAll() {
-        return this.customerService.findAll()
+    async findAll() {
+        return await this.customerService.findAll()
     }
 
     @Get(':id')
@@ -22,8 +22,8 @@ export class CustomerController {
     }
 
     @Post()
-    create(@Body(new CustomerPipeBody()) body: ICustomer) {
-        return this.customerService.create(body)
+    async create(@Body(new CustomerPipeBody()) body: ICustomer) {
+        return await this.customerService.create(body)
             .catch(manageError)
     }
 

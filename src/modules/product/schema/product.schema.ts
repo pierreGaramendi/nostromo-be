@@ -18,7 +18,7 @@ export class Product extends Document {
     @Prop({ trim: true, required: true })
     title: string;
 
-    @Prop({ type: SchemaTypes.Types.ObjectId, ref: 'User' })
+    @Prop({ type: SchemaTypes.Types.ObjectId, ref: 'Customer' })
     sellerId: Customer;
 
     @Prop({ trim: true })
@@ -46,7 +46,7 @@ export class Product extends Document {
     discount: Discount;
 
     @Prop()
-    model: string;
+    brand: string;
 
     @Prop()
     sold: number;

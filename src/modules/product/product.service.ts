@@ -7,21 +7,21 @@ import { Product } from 'src/modules/product/schema/product.schema';
 @Injectable()
 export class ProductService {
     constructor(
-        @InjectModel(Product.name) private customerModel: Model<Product>
+        @InjectModel(Product.name) private productModel: Model<Product>
     ) {
 
     }
 
-    findAll() {
-        return this.customerModel.find()
+    async findAll() {
+        return await this.productModel.find()
     }
 
     async findOne(id: string) {
-        return this.customerModel.findById(id)
+        return await this.productModel.findById(id)
     }
 
-    create(product: IProduct) {
-        return this.customerModel.create(product)
+    async create(product: IProduct) {
+        return await this.productModel.create(product)
     }
 
 }

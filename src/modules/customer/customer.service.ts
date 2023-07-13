@@ -11,31 +11,31 @@ export class CustomerService {
         @InjectModel(Customer.name) private customerModel: Model<Customer>
     ) { }
 
-    findAll() {
-        return this.customerModel.find()
+    async findAll() {
+         return await this.customerModel.find()
     }
 
     async findOne(id: string) {
-        return this.customerModel.findById(id)
+        return await this.customerModel.findById(id)
     }
 
-    create(customer: ICustomer) {
-        return this.customerModel.create(customer)
+    async create(customer: ICustomer) {
+        return await this.customerModel.create(customer)
     }
 
     async update(id: string, customer: ICustomerUpdate) {
-        return this.customerModel.findByIdAndUpdate(id, customer, { new: true })
+        return await this.customerModel.findByIdAndUpdate(id, customer, { new: true })
     }
 
     async addAddress(id: string, address: ICustomerAddress) {
-        return this.customerModel.updateOne(
+        return await this.customerModel.updateOne(
             { _id: id },
             { $addToSet: { address: address } }
         )
     }
 
     async updateAddress(id: string, address: ICustomerAddress, idAddress: string) {
-        return this.customerModel.findOneAndUpdate(
+        return await this.customerModel.findOneAndUpdate(
             { _id: id, "address._id": idAddress },
             { $set: buildUpdateParams('address', address) }
         )
