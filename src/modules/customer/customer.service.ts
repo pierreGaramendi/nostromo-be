@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/db/customer.interface';
-import { Customer } from 'src/schema/customer.schema';
+import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/modules/customer/dto/customer.dto';
+import { Customer } from 'src/modules/customer/schema/customer.schema';
 import { buildUpdateParams } from 'src/utils/update.util';
 
 @Injectable()

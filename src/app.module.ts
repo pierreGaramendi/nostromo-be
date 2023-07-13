@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CustomerModule } from './customer/customer.module';
+import { CustomerModule } from './modules/customer/customer.module';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
@@ -10,7 +11,8 @@ import { CustomerModule } from './customer/customer.module';
       isGlobal: true
     }),
     MongooseModule.forRoot(process.env.CONN_MONGO),
-    CustomerModule
+    CustomerModule,
+    ProductModule
   ],
   controllers: [],
   providers: []

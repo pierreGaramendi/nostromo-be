@@ -1,4 +1,4 @@
-import { defaultErrorMessage } from "src/exception/messages.constant";
+import { defaultErrorMessage } from "src/constants/messages.constant";
 
 export const ServerErrors = {
     11000: "El email proporcionado ya existe"

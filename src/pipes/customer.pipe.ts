@@ -2,7 +2,7 @@ import { ArgumentMetadata, BadRequestException, Inject, Scope } from "@nestjs/co
 import { PipeTransform } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
-import { defaultErrorMessage } from "src/exception/messages.constant";
+import { defaultErrorMessage } from "src/constants/messages.constant";
 import { head, has, keys, pipe, prop, gt, length } from 'ramda'
 
 const obtainPropChildren = prop('children');

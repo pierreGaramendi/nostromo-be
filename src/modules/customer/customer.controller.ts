@@ -1,7 +1,7 @@
 import { Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
-import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/db/customer.interface';
+import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/modules/customer/dto/customer.dto';
 import { CustomerService } from './customer.service';
-import { CustomerPipeBody } from '../pipes/customer.pipe';
+import { CustomerPipeBody } from '../../pipes/customer.pipe';
 import { isNil } from 'ramda'
 import { manageError } from './customer.util';
 

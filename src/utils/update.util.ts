@@ -1,4 +1,4 @@
-import { ICustomerAddress } from "src/db/customer.interface";
+import { ICustomerAddress } from "src/modules/customer/dto/customer.dto";
 
 export const buildUpdateParams = (element: string, address: ICustomerAddress) => {
     const result = {}

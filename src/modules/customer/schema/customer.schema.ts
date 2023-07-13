@@ -44,7 +44,7 @@ export class Customer extends Document {
     @Prop({ trim: true })
     hashedAndSaltedPassword: string;
 
-    @Prop()
+    @Prop({ type: Boolean })
     emailVerified: false;
 
     @Prop({ type: [customerAdressSchema] })
