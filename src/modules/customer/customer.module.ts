@@ -1,22 +1,19 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Customer, customerSchema } from 'src/modules/customer/schema/customer.schema';
 import { CustomerService } from './customer.service';
 import { CustomerController } from './customer.controller';
 import { CustomerPipeBody } from '../../pipes/customer.pipe';
+import { CustomerMongooseInitializer } from 'src/constants/mongoose.initializer';
 
 @Module({
     imports: [
-        MongooseModule.forFeature(
-            [
-                {
-                    name: Customer.name,
-                    schema: customerSchema
-                }
-            ]
-        )
+        CustomerMongooseInitializer
     ],
-    providers: [CustomerService, CustomerPipeBody],
-    controllers: [CustomerController]
+    providers: [
+        CustomerService,
+        CustomerPipeBody
+    ],
+    controllers: [
+        CustomerController
+    ]
 })
 export class CustomerModule { }

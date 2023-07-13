@@ -12,7 +12,7 @@ export class CustomerService {
     ) { }
 
     async findAll() {
-         return await this.customerModel.find()
+        return await this.customerModel.find()
     }
 
     async findOne(id: string) {
@@ -40,4 +40,5 @@ export class CustomerService {
             { $set: buildUpdateParams('address', address) }
         )
     }
+
 }
