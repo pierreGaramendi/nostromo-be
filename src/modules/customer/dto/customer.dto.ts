@@ -28,6 +28,9 @@ export class ICustomerAddress {
 }
 
 export class ICustomer {
+
+    _id: string
+
     @IsNotEmpty({ message: 'No se proporciono el nombre' })
     @IsString({ message: 'El nombre proporcionado no es un texto' })
     fname: string;
@@ -41,7 +44,7 @@ export class ICustomer {
     email: string;
 
     @IsNotEmpty()
-    hashedAndSaltedPassword: string;
+    password: string;
 
     @IsBoolean()
     emailVerified: boolean;

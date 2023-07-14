@@ -1,0 +1,1 @@
+export const propsToGet = ['_id', 'fname', 'lname', 'email', 'phoneNumber']

@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { encodePassword } from 'src/auth/encrypt';
 import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/modules/customer/dto/customer.dto';
 import { Customer } from 'src/modules/customer/schema/customer.schema';
 import { buildUpdateParams } from 'src/utils/update.util';
-
+import { dissoc, assoc, pick } from 'ramda'
+import { propsToGet } from './constants/customer.constants';
 @Injectable()
 export class CustomerService {
     constructor(
@@ -20,7 +22,10 @@ export class CustomerService {
     }
 
     async create(customer: ICustomer) {
-        return await this.customerModel.create(customer)
+        const hashedAndSaltedPassword = encodePassword(customer.password)
+        const newCustomer = assoc('hashedAndSaltedPassword', hashedAndSaltedPassword, dissoc('password', customer))
+        const result = await this.customerModel.create(newCustomer)
+        return pick(propsToGet, result)
     }
 
     async update(id: string, customer: ICustomerUpdate) {

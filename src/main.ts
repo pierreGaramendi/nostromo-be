@@ -25,6 +25,8 @@ async function bootstrap() {
   )
   app.useGlobalFilters(new HttpExceptionFilter());
   app.enableCors(CORS);
+  app.use(passport.initialize())
+  app.use(passport.session())
   const port = configService.get('PORT')
   app.setGlobalPrefix('api')
   await app.listen(port);
