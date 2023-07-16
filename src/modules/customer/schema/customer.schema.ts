@@ -27,17 +27,15 @@ export const customerAdressSchema = SchemaFactory.createForClass(CustomerAdress)
 @Schema({ timestamps: true })
 export class Customer extends Document {
     @Prop({ trim: true, required: true })
+    username: string;
+
+    @Prop({ trim: true, required: true })
     fname: string;
 
     @Prop({ trim: true })
     lname: string;
 
-    @Prop({
-        trim: true,
-        unique: true,
-        required: true,
-        index: true
-    })
+    @Prop({ trim: true, unique: true, required: true, index: true })
     @IsEmail()
     email: string;
 
@@ -52,6 +50,12 @@ export class Customer extends Document {
 
     @Prop({ maxlength: 9 })
     phoneNumber: string
+
+    @Prop({ minlength: 8, maxlength: 8, required: true })
+    dni: string
+
+    @Prop({ trim: true })
+    photo: string
 }
 
 export const customerSchema = SchemaFactory.createForClass(Customer)

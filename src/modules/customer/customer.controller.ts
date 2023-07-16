@@ -1,15 +1,18 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post, Put, SetMetadata, UseGuards } from '@nestjs/common';
 import { ICustomer, ICustomerAddress, ICustomerUpdate } from 'src/modules/customer/dto/customer.dto';
 import { CustomerService } from './customer.service';
 import { CustomerPipeBody } from '../../pipes/customer.pipe';
 import { isNil } from 'ramda'
 import { manageError } from './customer.util';
 import { AuthenticatedGuard } from 'src/auth/custome.guard';
+import { Roles } from 'src/auth/role.decorator';
 
 @Controller('customer')
 export class CustomerController {
     constructor(private customerService: CustomerService) { }
 
+    @Roles('admin')
+    @SetMetadata('SomeAnnotatedDecorator', 'this is the value')
     @UseGuards(AuthenticatedGuard)
     @Get()
     async findAll() {

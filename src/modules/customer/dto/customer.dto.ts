@@ -28,8 +28,7 @@ export class ICustomerAddress {
 }
 
 export class ICustomer {
-
-    _id: string
+    username: string
 
     @IsNotEmpty({ message: 'No se proporciono el nombre' })
     @IsString({ message: 'El nombre proporcionado no es un texto' })
@@ -42,6 +41,12 @@ export class ICustomer {
     @IsNotEmpty({ message: 'No se proporciono el email' })
     @IsEmail({}, { message: 'El valor proporcionado no es un email valido' })
     email: string;
+
+    @IsNotEmpty({ message: 'No se proporciono el email' })
+    @IsString()
+    @MinLength(8, { message: 'El numero es demasiado corto. El minimo es $constraint1 numeros, pero se recibio $value' })
+    @MaxLength(8, { message: 'El numero es demasiado largo. El maximo es $constraint1 numeros, pero se recibio $value' })
+    dni: string;
 
     @IsNotEmpty()
     password: string;
