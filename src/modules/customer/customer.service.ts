@@ -14,7 +14,7 @@ export class CustomerService {
     ) { }
 
     async findAll() {
-        return await this.customerModel.find()
+        return await this.customerModel.find({}, { hashedAndSaltedPassword: 0, emailVerified: 0 })
     }
 
     async findOne(id: string) {

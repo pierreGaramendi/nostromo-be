@@ -4,25 +4,13 @@ import { ConfigService } from '@nestjs/config';
 import { CORS } from './constants';
 import { HttpExceptionFilter } from './exception/http.filter';
 import 'reflect-metadata';
-import * as session from 'express-session'
 import * as passport from 'passport'
+import { initSession } from './auth/session.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService)
-  app.use(
-    session(
-      {
-        name:'nostromo_session_id',
-        secret: 'fuckwhatisaiditdontmeanshitnow',
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-          maxAge: 900000
-        }
-      }
-    )
-  )
+  app.use(initSession)
   app.useGlobalFilters(new HttpExceptionFilter());
   app.enableCors(CORS);
   app.use(passport.initialize())
