@@ -7,9 +7,8 @@ import { IProduct } from 'src/modules/product/dto/product.interface';
 
 @Controller('product')
 export class ProductController {
-    constructor(private productService: ProductService){
-
-    }
+    constructor(private productService: ProductService){}
+    
     @Get()
     findAll() {
         return this.productService.findAll()

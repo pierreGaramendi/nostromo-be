@@ -16,9 +16,6 @@ export class CustomAuthGuard extends AuthGuard('local') {
 export class AuthenticatedGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
   async canActivate(context: ExecutionContext) {
-/*  const roles = this.reflector.get<string[]>('roles', context.getHandler());
-    const roles = this.reflector.getAllAndOverride<string[]>('roles', [context.getHandler(),context.getClass(),]);
-    const metaValue = this.reflector.get<string[]>('SomeAnnotedDecorator', context.getHandler()); */
     const request = context.switchToHttp().getRequest<any>();
     return request.isAuthenticated();
   }

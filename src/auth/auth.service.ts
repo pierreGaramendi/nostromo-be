@@ -11,21 +11,20 @@ export interface IUser {
 
 @Injectable()
 export class AuthService {
-    constructor(
-        @InjectModel(Customer.name) private customerModel: Model<Customer>
-    ) { }
+    constructor(@InjectModel(Customer.name) private customerModel: Model<Customer>) { }
 
     async verify(email: string, password: string) {
         const users: any = await this.findOneByUsername(email);
         const user = head(users)
         if (user && comparePassword(password, user.hashedAndSaltedPassword)) {
-            const { _id, fname, lname, email, phoneNumber } = user
-            return { _id, fname, lname, email, phoneNumber };
+            const { fname, lname, email, phoneNumber } = user
+            return { fname, lname, email, phoneNumber }
         }
         return null;
     }
 
     async findOneByUsername(username: string) {
-        return await this.customerModel.find({ email: username });
+        return await this.customerModel.find({ email: username })
+            .select("username fname lname email phoneNumber hashedAndSaltedPassword");
     }
 }

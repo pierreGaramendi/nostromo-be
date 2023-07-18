@@ -6,11 +6,7 @@ import { Product } from 'src/modules/product/schema/product.schema';
 
 @Injectable()
 export class ProductService {
-    constructor(
-        @InjectModel(Product.name) private productModel: Model<Product>
-    ) {
-
-    }
+    constructor(@InjectModel(Product.name) private productModel: Model<Product>) { }
 
     async findAll() {
         return await this.productModel.find()

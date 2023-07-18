@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CustomerModule } from './modules/customer/customer.module';
 import { ProductModule } from './modules/product/product.module';
 import { AuthModule } from './auth/auth.module';
+import { GoogleCloudStorageModule } from './modules/gcp/gcs.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot(process.env.CONN_MONGO),
     CustomerModule,
     ProductModule,
-    AuthModule
+    AuthModule,
+    GoogleCloudStorageModule
   ],
   controllers: [],
   providers: []

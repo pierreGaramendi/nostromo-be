@@ -13,7 +13,7 @@ export const initSession = session(
       resave: false,
       saveUninitialized: true,
       cookie: {
-        maxAge: 60000
+        maxAge: 120000
       },
       store: storeMongooseSessions
     }
