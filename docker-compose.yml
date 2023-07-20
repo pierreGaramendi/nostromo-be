@@ -1,4 +1,10 @@
-version: '3.1'
+version: '1.0'
 
 services:
-  codrr-pg:
+  nostromo-backend-app:
+    image: nostromo/backend
+    environment:
+      - NODE_ENV='prod'
+    container_name: nostromo_be_container
+    ports:
+      - '8000:8000'

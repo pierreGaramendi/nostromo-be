@@ -9,7 +9,30 @@ export class ProductService {
     constructor(@InjectModel(Product.name) private productModel: Model<Product>) { }
 
     async findAll() {
-        return await this.productModel.find()
+        const options = {
+            page: 1,
+            limit: 10,
+          };
+          
+        var myAggregate:any = this.productModel.aggregate()
+
+        await myAggregate.paginateExec(options, function(err, results) {
+            if(err) {
+                console.log(err);
+            }
+            else {
+                console.log(typeof results)
+               return JSON.parse(results) ;
+            }
+        })
+
+/*         return await this.productModel.find(
+            {},
+            {
+                page: Number(1),
+                limit: Number(10),
+            },
+        ); */
     }
 
     async findOne(id: string) {
