@@ -2,9 +2,9 @@ version: '1.0'
 
 services:
   nostromo-backend-app:
-    image: nostromo/backend
+    build: .
     environment:
-      - NODE_ENV='prod'
+      NODE_ENV: prod
     container_name: nostromo_be_container
     ports:
       - '8000:8000'
