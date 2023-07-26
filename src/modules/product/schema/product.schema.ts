@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaTypes } from "mongoose";
 import { Customer } from "../../customer/schema/customer.schema";
+import * as paginate from "mongoose-paginate-v2";
 
 @Schema({ timestamps: true })
 export class Discount extends Document {
@@ -60,5 +61,5 @@ export class Product extends Document {
     @Prop()
     pickUpInPerson: boolean
 }
-
 export const productSchema = SchemaFactory.createForClass(Product)
+productSchema.plugin(paginate);

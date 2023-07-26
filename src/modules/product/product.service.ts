@@ -1,21 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, PaginateModel } from 'mongoose';
 import { IProduct } from 'src/modules/product/dto/product.interface';
 import { Product } from 'src/modules/product/schema/product.schema';
-import { take } from 'ramda'
+
 @Injectable()
 export class ProductService {
-    constructor(@InjectModel(Product.name) private productModel: Model<Product>) { }
+    constructor(
+        @InjectModel(Product.name) private productModel: Model<Product>,
+        @InjectModel(Product.name) private productPaginatedModel: PaginateModel<Product>,
+    ) { }
 
-    async findAll(query: any) {
-        const { structureSearch, structureNext, sctructureSort, defaultLimit } = query
-        const found = await this.productModel.find(structureSearch).select('title price _id').sort(sctructureSort);
-        const total = found.length
-        const result = found.filter(product => product._id < '64b625b43a261e9bfd7d8424');
-        const items = take(3, result)
-        const last = Math.ceil(total/3)
-        return { total, last, items }
+    async search(query: any) {
+        const { structureSearch, options, toSearch } = query
+        if (toSearch) return {}
+        return await this.productPaginatedModel.paginate(structureSearch, options);
     }
 
     async findOne(id: string) {
