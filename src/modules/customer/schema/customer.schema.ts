@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsEmail } from "class-validator";
 import { Document, Types } from "mongoose";
+import { SearchHistory, searchHistorySchema } from "./search-history.schema";
 
 @Schema()
 export class CustomerAdress extends Document {
@@ -47,6 +48,10 @@ export class Customer extends Document {
 
     @Prop({ type: [customerAdressSchema] })
     address: Types.Array<CustomerAdress>;
+
+
+    @Prop({ type: [searchHistorySchema] })
+    searchHistory: Types.Array<SearchHistory>;
 
     @Prop({ maxlength: 9 })
     phoneNumber: string

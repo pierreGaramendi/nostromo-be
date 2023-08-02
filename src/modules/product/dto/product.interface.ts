@@ -71,6 +71,15 @@ export class IProduct {
 
     @Type(() => IDiscount)
     discount: IDiscount;
+
+    @IsNotEmpty({ message: 'No proporciono la imagen de portada' })
+    thumbnail: string
+
+    @IsNotEmpty({ message: 'No se proporiciono el rating' })
+    rating: {
+        avg: { type: Number },
+        total: { type: Number }
+    }
 }
 
 
@@ -103,6 +112,15 @@ export class IProductUpdate {
     @MinLength(9, { message: 'El numero es demasiado corto. El minimo es $constraint1 numeros, pero se recibio $value' })
     @MaxLength(9, { message: 'El numero es demasiado largo. El maximo es $constraint1 numeros, pero se recibio $value' })
     phoneNumber: string;
+
+    @IsNotEmpty({ message: 'No proporciono la imagen de portada' })
+    thumbnail: string
+
+    @IsNotEmpty({ message: 'No se proporiciono el rating' })
+    rating: {
+        avg: { type: Number },
+        total: { type: Number }
+    }
 }
 
 

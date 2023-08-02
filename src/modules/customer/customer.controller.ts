@@ -12,7 +12,6 @@ export class CustomerController {
     constructor(private customerService: CustomerService) { }
 
     @Roles('admin')
-    @SetMetadata('SomeAnnotatedDecorator', 'this is the value')
     @UseGuards(AuthenticatedGuard)
     @Get()
     async findAll() {
@@ -24,6 +23,14 @@ export class CustomerController {
         const task = await this.customerService.findOne(id)
         if (isNil(task)) throw new NotFoundException('No se encontro al cliente')
         return task
+    }
+
+    @Get(':id/search-history')
+    async findSearchHistory(@Param('id') id: string) {
+        const result = await this.customerService.getSearchHistory(id)
+        const {searchHistory} = result
+        if (isNil(result)) throw new NotFoundException('No se encontro al cliente')
+        return searchHistory
     }
 
     @Post()

@@ -60,6 +60,16 @@ export class Product extends Document {
 
     @Prop()
     pickUpInPerson: boolean
+
+
+    @Prop({ type: String })
+    thumbnail: string
+
+    @Prop({ type: Object })
+    rating: {
+        avg: { type: Number },
+        total: { type: Number }
+    }
 }
 export const productSchema = SchemaFactory.createForClass(Product)
 productSchema.plugin(paginate);

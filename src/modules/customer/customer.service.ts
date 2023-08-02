@@ -21,6 +21,10 @@ export class CustomerService {
         return await this.customerModel.findById(id)
     }
 
+    async getSearchHistory(id: string) {
+        return await this.customerModel.findById(id).select('searchHistory -_id')
+    }
+
     async create(customer: ICustomer) {
         const hashedAndSaltedPassword = encodePassword(customer.password)
         const newCustomer = assoc('hashedAndSaltedPassword', hashedAndSaltedPassword, dissoc('password', customer))

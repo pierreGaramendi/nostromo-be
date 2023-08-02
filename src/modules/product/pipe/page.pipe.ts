@@ -1,6 +1,6 @@
 import { ArgumentMetadata } from "@nestjs/common";
 import { PipeTransform } from "@nestjs/common";
-import { isNil, not, isEmpty } from 'ramda'
+import { isNil, not } from 'ramda'
 import { defaultLimit, isNone } from 'src/constants/pagination';
 
 export class PagePipe implements PipeTransform {
@@ -27,7 +27,7 @@ export class PagePipe implements PipeTransform {
         const evaluatedPage = page || 1
         let options = {
             page: evaluatedPage,
-            select: 'title price',
+            select: 'title price description thumbnail rating discount',
             sort: sctructureSort,
             limit: defaultLimit,
             collation: {
