@@ -13,6 +13,7 @@ let finalMessage = defaultErrorMessage
 export class CustomerPipeBody implements PipeTransform {
     async transform(value: any, { metatype, type }: ArgumentMetadata): Promise<any> {
         if (type !== 'body') return value;
+        //hacer mas legible todo esta vaina o encontrar otra forma de capturar los mensajes error
         const instanced = plainToInstance(metatype, value);
         const classValidationErrors = await validate(instanced);
         if (classValidationErrors.length === 0) return value
@@ -28,7 +29,7 @@ export class CustomerPipeBody implements PipeTransform {
         }
 
         if (hasIsNotEmptyProp(allfinalMessages)) {
-            finalMessage = allfinalMessages['isNotEmpty']
+            finalMessage = allfinalMessages['isNotEmpty'] as string
         } else {
             finalMessage = allfinalMessages[head(keys(allfinalMessages))];
         }
