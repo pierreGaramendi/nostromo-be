@@ -5,13 +5,18 @@ import { Customer } from 'src/modules/customer/schema/customer.schema';
 import { head } from 'ramda';
 import { comparePassword } from './encrypt';
 
+type VerifyResponse = {
+  fname: string;
+  lname: string;
+  email: string;
+  phoneNumber: string;
+};
+
 @Injectable()
 export class AuthService {
-  constructor(
-    @InjectModel(Customer.name) private customerModel: Model<Customer>,
-  ) {}
+  constructor(@InjectModel(Customer.name) private customerModel: Model<Customer>) {}
 
-  async verify(email: string, password: string) {
+  async verify(email: string, password: string): Promise<VerifyResponse | null> {
     const users: Customer[] = await this.findOneByUsername(email);
     const user: Customer = head(users);
     if (user && comparePassword(password, user.hashedAndSaltedPassword)) {
@@ -22,8 +27,6 @@ export class AuthService {
   }
 
   async findOneByUsername(username: string): Promise<Customer[]> {
-    return await this.customerModel
-      .find({ email: username })
-      .select('username fname lname email phoneNumber hashedAndSaltedPassword');
+    return await this.customerModel.find({ email: username }).select('username fname lname email phoneNumber hashedAndSaltedPassword');
   }
 }

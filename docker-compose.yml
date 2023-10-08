@@ -7,4 +7,4 @@ services:
       NODE_ENV: prod
     container_name: nostromo_be_container
     ports:
-      - '8000:8000'
+      - '80:80'
